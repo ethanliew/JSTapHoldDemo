@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css">
+
+
+<style>
+
+ul.hold_menu {
+  list-style: none;
+}
+
+ul.hold_menu a, div.hold_trigger  {
+   display: inline-block;
+   padding: 5px 15px;
+   border: 1px solid #ccc;
+   width: 300px;
+}
+
+ul.hold_menu a:link, ul.hold_menu a:visited {
+   color: black;
+   text-decoration: none;
+}
+
+ul.hold_menu a:active, ul.hold_menu a:hover {
+   background: aqua;
+   text-decoration: none;
+}
+
+div.hold_trigger {
+   color: black;
+   cursor: pointer;
+   margin: 10px;
+}
+
+div.hold_trigger:hover {
+   background: #ccc;
+}
+
+
+</style>
+
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+<script>
+$(function(){
+
+
+// click and hold event listener
+
+var timeout_id = 0,
+    hold_time = 200,
+    hold_menu = $('.hold_menu'),
+    hold_trigger = $('.hold_trigger');
+
+hold_menu.hide();
+
+hold_trigger.mousedown(function() {
+    timeout_id = setTimeout(menu_toggle, hold_time);
+}).bind('mouseup mouseleave', function() {
+    clearTimeout(timeout_id);
+});
+
+function menu_toggle() {
+  hold_menu.toggle();
+}
+
+
+
+});
+</script>
+</head>
+<body>
+
+<div class="hold_trigger">click and hold to toggle menu</div>
+<ul class="hold_menu">
+    <li><a target="_blank" href="http://facebook.com">Fbook</a></li>
+   <li><a target="_blank" href="http://twitter.com">Twitter</a></li>
+   <li><a target="_blank" href="http://yahoo.com">Yahoo</a></li>
+</ul>
+
+</body>
+</html>
